@@ -1,6 +1,8 @@
 <?php
 namespace VoicesTest\View;
 
+use Exception;
+
 /**
  * Abstract class representing a view within the application.
  * Views can have different facts. These facets are manifested / expressed
@@ -58,26 +60,25 @@ abstract class View {
 	 * @param string $method
 	 * @param array $arguments
 	 * @throws Exception
-	 * @throws NoSuchMethodException
 	 */
 	public function __call ( string $method, array $arguments ) {
         $called_class = get_called_class();
 
 		if ( method_exists( $called_class, $method ) ) {
-            extract($this->data);
-
+            
 			ob_start();
             $this->{$method}();
             $template = ob_get_clean();
-
+            
+            extract($this->data);
             require_once "layout.default.php";
 
-            $page = ob_get_clean();
-            ob_end_flush();
+            $page = ob_get_contents();
+            ob_end_clean();
 
             return $page;
 		} else {
-			throw new NoSuchMethodException( "Method '{$method}' of the view '{$called_class}' does not exist." );
+			throw new Exception( "Method '{$method}' of the view '{$called_class}' does not exist." );
 		}
 	}
 }

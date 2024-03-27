@@ -1,10 +1,40 @@
 <?php
 namespace VoicesTest\Controller;
 
-abstract class Controller {
-    protected $tmpl;
+use stdClass;
+use PDO;
 
-    public function __construct(){
+//
+use VoicesTest\Exception\ActionNotExist;
+
+abstract class Controller {
+    public $tmpl;
+
+    protected ?stdClass $parameters;
+
+    protected ?PDO $db;
+
+    public function __construct(PDO $db = null){
+        $this->db = $db;
+
+        $this->parameters = new stdClass;
+
+        $parameters = array_merge($_GET, $_REQUEST, $_POST);
+
+        foreach($parameters as $key => $value){
+            $this->parameters->{$key} = $value;
+        }
+    }
+
+    /**
+     * Redirect the application to a specified location
+     *
+     * @param string $location The location to direct the application to
+     * @return void
+     */
+    protected function redirect(string $location):void {
+        header("Location: {$location}");
+        exit; 
     }
 
     public function getStatus(): string {
@@ -20,8 +50,7 @@ abstract class Controller {
 	 *
 	 * @param string $method
 	 * @param array $arguments
-	 * @throws Exception
-	 * @throws NoSuchMethodException
+	 * @throws ActionNotExist
 	 */
 	public function __call ( string $method, array $arguments ) {
         $called_class = get_called_class();
@@ -30,7 +59,7 @@ abstract class Controller {
             $this->{$method}();
             return $this->tmpl->{$method}();
 		} else {
-			throw new NoSuchMethodException( "Action '{$method}' of the controller '{$called_class}' does not exist." );
+			throw new ActionNotExist( "Action '{$method}' of the controller '{$called_class}' does not exist." );
 		}
 	}
 }

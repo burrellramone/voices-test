@@ -2,15 +2,20 @@ $base-color: #385F71;
 $base-color-dark: #2B4162;
 $text-color: #444444;
 $link-color: darkgoldenrod;
-$button-color: bisque;
+$error-color: #d45b00;
+$button-color: #ff9e2c;
+$button-hover-color: #f88600;
 $background-color: #F5F0F6;
 $border-color:#D7B377;
 $border-color-dark:#8F754F;
+$border-error-color: firebrick;
 $white: #FFFFFF;
+$border-radius: 0.25rem;
+$success-color:#4caf50;
 
 html {
   box-sizing: border-box;
-  font-size: 13px;
+  font-size: 15px;
 }
   
 *,
@@ -55,6 +60,10 @@ img {
   
 button {
   cursor: pointer;
+
+  &[diabled], &.disabled {
+    opacity:0.5;
+  }
 }
   
 a {
@@ -78,19 +87,71 @@ tr {
 tr.nodata td {
   text-align: center;
 }
-  
+
+label {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+select,input,textarea, button {
+  width:100%;
+  height:40px;
+  border:1px solid $border-color-dark;
+  outline: none;
+  border-radius: $border-radius;
+  color: #454545;
+  padding: 5px;
+}
+
+select.invalid, input.invalid, textarea.invalid {
+  border:2px solid $border-error-color;
+}
+
+textarea {
+  min-height: 150px;
+}
+
+input[type="file"] {
+  cursor:pointer;
+}
+
+button[type="reset"],
+input[type="reset"] {
+  background-color: darkgray;
+  color:$white;
+}
+
+select:focus,
+input:focus, 
+textarea:focus,
+select:active,
+input:active, 
+textarea:active {
+  border:2px solid #72aaff;
+}
+
 .container {
   margin: 0 auto;
-  max-width: 50rem;
+  width:950px;
   padding: 2rem 1rem;
+  max-width: 100%;
 }
 
 .btn {
   padding: 0.5rem;
   border: 1px solid $border-color-dark;
-  border-radius: 0.25rem;
   outline:none;
   background-color: $button-color;
+  font-weight: bold;
+}
+
+.btn:not(button[type="reset"]):hover {
+  background-color: $button-hover-color;
+}
+
+.btn[type="reset"]:hover{
+  background-color:#9f9f9f;
 }
 
 form button[type="submit"].btn {
@@ -110,15 +171,109 @@ table tbody tr:hover {
   background-color: #dee8ff;
 }
 
+.float-right {
+  float: right;
+}
+
 .mb-1 {
   margin-bottom:1rem;
 }
 
+.mt-1 {
+  margin-top:1rem;
+}
+
+.form-fieldset {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+.form-fieldset .form-field {
+  flex:1;
+  padding:0px 5px;
+}
+
+.form-field .form-field-label .required {
+  color: $error-color;
+}
+
+.form-field .form-field-error {
+  color: $error-color;
+  margin-top: 5px;
+}
+
+#ajf .form-fieldset:last-of-type {
+  margin-top:3rem;
+}
+
+#ajf .form-fieldset img.voices {
+  height: 25px;
+}
+
+#ajf .form-fieldset:first-of-type .form-field:first-of-type {
+  flex: 3;
+}
+
+table.jobs a.attachment {
+  display:block;
+}
+
+table.jobs tbody tr td:nth-child(1) a.attachment {
+  display:none;
+}
+
+.page-title {
+  color: $base-color-dark;
+  border-bottom: 1px solid $border-color-dark;
+  padding: 10px 0px;
+}
+
+.content-right {
+  text-align: right;
+}
+
+.alert {
+  padding:15px;
+  border:1px solid $base-color-dark;
+  border-radius: $border-radius;
+  margin:10px 0px;
+  background-color:darkgray;
+
+  &.alert-success {
+    background-color: $success-color;
+    color:$white;
+    border:1px solid #4caf50;
+  }
+}
+
+.job .additional-information {
+  white-space: pre-wrap;
+}
+
 @media (max-width: 768px){
+    table.jobs tr th:nth-child(3),
+    table.jobs tr td:nth-child(3),
     table.jobs tr th:nth-child(4),
-    table.jobs tr td:nth-child(4),
-    table.jobs tr th:nth-child(5),
-    table.jobs tr td:nth-child(5) {
+    table.jobs tr td:nth-child(4) {
         display: none;
+    }
+
+    .form-fieldset {
+      flex-direction: column;
+    }
+
+    #ajf .form-fieldset:first-of-type {
+      flex-direction: column-reverse;
+    }
+
+    .form-fieldset:not(:first-of-type) .form-field:not(:last-of-type) {
+      margin-bottom: 1rem;
+    }
+
+    table.jobs tbody tr td:nth-child(1) a.attachment {
+      display:block;
     }
 }
