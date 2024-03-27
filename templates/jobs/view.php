@@ -13,4 +13,8 @@
     <?php } ?>
 
     <p class="additional-information"><?=$job->getAdditionalInformation()?></p>
+
+    <div class="mt-1">
+        <a href="/jobs/delete?id=<?=$job->getId()?>" class="btn btn-block mobile djl">Delete Job</a>
+    </div>
 </div>
