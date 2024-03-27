@@ -59,7 +59,7 @@
         <div class="form-field">
             <label class="form-field-label" for="attachment">File Attachment:</label>
             <div class="form-field_contents">
-                <input id="attachment" type="file" name="attachment" accept=".pdf,.png,.jpg,.jpeg"/>
+                <input id="attachment" type="file" name="attachment" accept=".pdf,.png,.jpg,.jpeg,.odf,.docx,.xls,.xlsx"/>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-$base-color: #385F71;
+$base-color: #00449F;
 $base-color-dark: #2B4162;
 $text-color: #444444;
 $link-color: darkgoldenrod;
@@ -102,7 +102,7 @@ select,input,textarea, button {
   outline: none;
   border-radius: $border-radius;
   color: #454545;
-  padding: 5px;
+  padding:10px;
 }
 
 select.invalid, input.invalid, textarea.invalid {
@@ -115,6 +115,8 @@ textarea {
 
 input[type="file"] {
   cursor:pointer;
+  border:none;
+  background-color: lightgray;
 }
 
 button[type="reset"],
@@ -124,10 +126,10 @@ input[type="reset"] {
 }
 
 select:focus,
-input:focus, 
+input:not([type="file"]):focus, 
 textarea:focus,
 select:active,
-input:active, 
+input:not([type="file"]):active, 
 textarea:active {
   border:2px solid #72aaff;
 }
