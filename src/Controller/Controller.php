@@ -55,11 +55,13 @@ abstract class Controller {
 	public function __call ( string $method, array $arguments ) {
         $called_class = get_called_class();
 
-		if ( method_exists( $called_class, $method ) ) {
-            $this->{$method}();
-            return $this->tmpl->{$method}();
-		} else {
-			throw new ActionNotExist( "Action '{$method}' of the controller '{$called_class}' does not exist." );
+        $reflection = new \ReflectionClass($this);
+
+		if (!$reflection->hasMethod($method) || $reflection->getMethod($method)->isPrivate()){
+            throw new ActionNotExist( "Action '{$method}' of the controller '{$called_class}' does not exist." );
 		}
+
+        $this->{$method}();
+        return $this->tmpl->{$method}();
 	}
 }

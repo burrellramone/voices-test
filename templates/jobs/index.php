@@ -38,7 +38,7 @@
                             <a href="/<?=$attachment->getPath()?>" title="<?=$attachment->getName()?>" target="_blank" class="attachment"><?=$attachment->getName()?></a>
                         <?php } ?>
                     </td>
-                    <td><?=$job->getDateTimeCreated()->format("D, M jS Y h:i a")?></td>
+                    <td><?=$job->getDateTimeCreated()->format("M jS, Y h:i a")?></td>
                     <td>
                         <a href="/jobs/delete?id=<?=$job->getId()?>" title="Delete Job" class="djl">Delete</a>
                     </td>
