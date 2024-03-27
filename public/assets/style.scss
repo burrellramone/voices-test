@@ -246,10 +246,20 @@ table.jobs tbody tr td:nth-child(1) a.attachment {
     color:$white;
     border:1px solid #4caf50;
   }
+
+  .close {
+    float: right;
+    font-size: 18px;
+    border-radius: 100%;
+    color: white;
+    cursor: pointer;
+  }
 }
 
-.job .additional-information {
-  white-space: pre-wrap;
+.job {
+  .additional-information {
+    white-space: pre-wrap;
+  }
 }
 
 @media (max-width: 768px){

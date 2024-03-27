@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <title><?=$page_title?> - <?=$app_name?></title>
         <link rel="stylesheet" type="text/css" href="/assets/style.css" />
-        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, minimum-scale=1, maximum-scale=1" />

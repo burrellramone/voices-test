@@ -1,7 +1,7 @@
 <?php if($job_submitted){?>
-    <div class="alert alert-success">Job was successfully submitted.</div>
+    <div class="alert alert-success">Job was successfully submitted. <span class="close">&#10005;</span></div>
 <?php } elseif($job_deleted){?>
-    <div class="alert alert-success">Job was successfully deleted.</div>
+    <div class="alert alert-success">Job was successfully deleted. <span class="close">&#10005;</span></div>
 <?php } ?>
 
 

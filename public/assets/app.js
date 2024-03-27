@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function(e){
     var countryEl = document.getElementById('country-id');
     //delete job links
     var deleteJobLinks = document.getElementsByClassName('djl');
+    //remove alert buttons
+    var removeAlertButtons = document.getElementsByClassName('close');
 
     if(ai){
         ['keyup', 'change'].forEach((type) => {
@@ -36,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function(e){
                 stateEl.removeChild(childOption);
             }
 
-            //console.log('good', stateEl);
             stateEl.setAttribute('disabled', 'disabled');
             stateEl.value = '';
 
@@ -52,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function(e){
 
                 stateEl.removeAttribute('disabled');
             }
-            
         });
     }
 
@@ -74,8 +74,18 @@ document.addEventListener('DOMContentLoaded', function(e){
         }
     }
 
+    if(removeAlertButtons.length){
+        for(var i = 0; i < removeAlertButtons.length; i++) {
+            var button = removeAlertButtons[i];
+
+            button.addEventListener('click', function(e){
+                e.target.parentNode.remove();
+            });
+        }
+    }
+
     if(addJobForm){
-        function getFormValidatableInputs(form) {
+        function getFormValidatableFields(form) {
             var validatableInputs = [];
             var inputs = form.getElementsByTagName('input');
             var selects = form.getElementsByTagName('select');
@@ -103,9 +113,25 @@ document.addEventListener('DOMContentLoaded', function(e){
             return errorMessageEl;
         }
 
+        function removeFormFieldValidationErrors(form){
+            var allFields = getFormValidatableFields(form);
+
+            allFields.forEach((field) => {
+                //remove existing error message for field, if any and
+                //remove invalid class
+                var formFieldError = field.parentNode.querySelector('.form-field-error');
+                
+                field.classList.remove('invalid');
+
+                if(formFieldError) {
+                    formFieldError.remove();
+                }
+            });
+        }
+
         function validateFormFields(form, input){
             var formValid = true;
-            var allFields = getFormValidatableInputs(form);
+            var allFields = getFormValidatableFields(form);
             var fieldsToValidate = input ? [input] : allFields;
 
             fieldsToValidate.forEach((field) => {
@@ -140,6 +166,7 @@ document.addEventListener('DOMContentLoaded', function(e){
             //is completed
             await new Promise(resolve => setTimeout(resolve, 250));
 
+            removeFormFieldValidationErrors(e.target);
             countryEl.dispatchEvent(new Event("change"));
             ai.dispatchEvent(new Event("change"));
         }
@@ -159,11 +186,20 @@ document.addEventListener('DOMContentLoaded', function(e){
             submitButton.classList.add("disabled");
         });
 
-        var addJobFormValidatableInputs = getFormValidatableInputs(addJobForm);
+        var addJobFormValidatableInputs = getFormValidatableFields(addJobForm);
 
         addJobFormValidatableInputs.forEach((input) => {
             ['blur', 'change'].forEach(function(type){
                 input.addEventListener(type, function(e){
+                    var currentValue = input.value ? input.value : null;
+                    var previousValue = input.previousValue ? input.previousValue : null;
+
+                    if(previousValue == currentValue){
+                        //input value didn't change, so don't trigger form validation on it
+                        return;
+                    }
+
+                    input.previousValue = currentValue;
                     validateFormFields(addJobForm, e.target);
                 });
             });

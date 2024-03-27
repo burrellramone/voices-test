@@ -231,6 +231,14 @@ table.jobs tbody tr td:nth-child(1) a.attachment {
   border: 1px solid #4caf50;
 }
 
+.alert .close {
+  float: right;
+  font-size: 18px;
+  border-radius: 100%;
+  color: white;
+  cursor: pointer;
+}
+
 .job .additional-information {
   white-space: pre-wrap;
 }
