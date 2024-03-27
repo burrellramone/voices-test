@@ -77,7 +77,7 @@ final class Jobs extends Controller {
             $uploaded_file = UploadedFile::get('attachment');
 
             //move file
-            $filename = $uploaded_file->name;
+            $filename = uniqid("voices_", true) . "_". $uploaded_file->name;
             $attachment_relpath = "attachments/{$filename}";
             move_uploaded_file($uploaded_file->tmp_name, DOCUMENT_ROOT . "/public/{$attachment_relpath}");
 
