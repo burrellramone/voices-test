@@ -3,6 +3,9 @@ namespace VoicesTest\View;
 
 use Exception;
 
+//
+use VoicesTest\Config;
+
 /**
  * Abstract class representing a view within the application.
  * Views can have different facts. These facets are manifested / expressed
@@ -21,6 +24,7 @@ abstract class View {
      */
     public function __construct(array $data = []){
         $this->data = $data;
+        $this->data['app_name'] = Config::read('app_name');
     }
 
     protected function index() {

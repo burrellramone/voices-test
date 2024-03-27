@@ -105,7 +105,8 @@ document.addEventListener('DOMContentLoaded', function(e){
 
         function validateFormFields(form, input){
             var formValid = true;
-            var fieldsToValidate = input ? [input] : getFormValidatableInputs(form);
+            var allFields = getFormValidatableInputs(form);
+            var fieldsToValidate = input ? [input] : allFields;
 
             fieldsToValidate.forEach((field) => {
                 if(!formValid){
@@ -166,6 +167,6 @@ document.addEventListener('DOMContentLoaded', function(e){
                     validateFormFields(addJobForm, e.target);
                 });
             });
-        })
+        });
     }
 });

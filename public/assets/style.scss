@@ -15,7 +15,7 @@ $success-color:#4caf50;
 
 html {
   box-sizing: border-box;
-  font-size: 15px;
+  font-size: 14px;
 }
   
 *,
@@ -92,6 +92,7 @@ label {
   font-weight: bold;
   margin-bottom: 0.25rem;
   display: block;
+  cursor: pointer;
 }
 
 select,input,textarea, button {
@@ -211,10 +212,6 @@ table tbody tr:hover {
 
 #ajf .form-fieldset img.voices {
   height: 25px;
-}
-
-#ajf .form-fieldset:first-of-type .form-field:first-of-type {
-  flex: 3;
 }
 
 table.jobs a.attachment {

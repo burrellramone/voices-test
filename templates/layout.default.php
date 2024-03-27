@@ -2,7 +2,7 @@
 <html lang="en">
      <head>
         <meta charset="utf-8" />
-        <title><?=$page_title?> - Voices Test</title>
+        <title><?=$page_title?> - <?=$app_name?></title>
         <link rel="stylesheet" type="text/css" href="/assets/style.css" />
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
         
@@ -12,7 +12,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes" />
     </head>
     <body>
-        <header class="header">Voices Test</header>
+        <header class="header"><?=$app_name?></header>
         <main>
             <div class="container">
                 <h1 class="page-title"><?=$page_title?></h1>
@@ -20,7 +20,7 @@
             </div>
         </main>
         <footer class="footer">
-            <small class="copyright">&copy; <?=date("Y")?> Voices Test</small>
+            <small class="copyright">&copy; <?=date("Y")?> <?=$app_name?></small>
         </footer>
     </body>
     <script type="text/javascript" src="/assets/app.js"></script>

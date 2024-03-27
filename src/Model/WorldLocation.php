@@ -10,6 +10,11 @@ final class WorldLocation extends Model {
     public $type_id;
 
 
+    /**
+     * Gets the locale name for this world location
+     *
+     * @return string The locale name for this world location
+     */
     public function getLocaleName():string {
         return $this->locale_name;
     }

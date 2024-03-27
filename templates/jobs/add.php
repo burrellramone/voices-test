@@ -7,14 +7,17 @@
 <form id="ajf" action="/jobs/create" method="POST" enctype="multipart/form-data" novalidate="true">
     <div class="form-fieldset">
         <div class="form-field">
-            <label class="form-field-label" for="title">Title: <span class="required">(required)</span></label>
-            <div class="form-field_contents">
-                <input type="text" name="title" id="title" maxlength="150" required/>
-            </div>
-        </div>
-        <div class="form-field">
             <div class="form-field_contents content-right">
                 <img class="voices" src="/assets/voices.png" alt="Voices"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-fieldset">
+        <div class="form-field">
+            <label class="form-field-label" for="title">Title: <span class="required">(required)</span></label>
+            <div class="form-field_contents">
+                <input type="text" name="title" id="title" maxlength="150" placeholder="Job Title" required/>
             </div>
         </div>
     </div>
