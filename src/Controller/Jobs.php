@@ -160,6 +160,9 @@ final class Jobs extends Controller {
     }
 
     private function sendJobEmailConfirmation(Job $job):void {
+        if(empty(ADMIN_EMAIL)){
+            return;
+        }
 
         $to = ADMIN_EMAIL;
         $subject = "New Job - {$job->getTitle()}";
