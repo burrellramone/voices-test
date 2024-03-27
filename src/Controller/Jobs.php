@@ -65,7 +65,7 @@ final class Jobs extends Controller {
         $this->tmpl->assign('job', $job);
     }
 
-    public function create():void{        
+    protected function create():void{        
         Job::validate($_POST);
         
         $title = $_POST['title'];
