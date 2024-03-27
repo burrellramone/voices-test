@@ -16,18 +16,15 @@ $success-color:#4caf50;
 html {
   box-sizing: border-box;
   font-size: 14px;
+  background-color: $background-color;
+  padding: 0px;
+  margin: 0px;
 }
-  
+
 *,
 *:before,
 *:after {
   box-sizing: inherit;
-}
-
-html,body {
-  background-color: $background-color;
-  padding: 0px;
-  margin: 0px;
 }
 
 body {
@@ -36,34 +33,27 @@ body {
   font-family: sans-serif;
   color: $text-color;
   min-height: 100vh;
-}
+  margin:0px;
 
-main {
-    flex: 1 1 auto;
-}
+  main {
+      flex: 1 1 auto;
+  }
 
-header,
-footer {
-  height: 50px;
-  color: $white;
-  font-size: 1.5rem;
-  flex: 0 0 auto;
-  background: $base-color;
-  text-align: center;
-  padding: 1rem 0 0;
-  box-shadow: inset 0 -0.375rem 0.25rem -0.25rem rgba(0, 0, 0, 0.1);
+  header,
+  footer {
+    height: 50px;
+    color: $white;
+    font-size: 1.5rem;
+    flex: 0 0 auto;
+    background: $base-color;
+    text-align: center;
+    padding: 1rem 0 0;
+    box-shadow: inset 0 -0.375rem 0.25rem -0.25rem rgba(0, 0, 0, 0.1);
+  }
 }
 
 img {
   max-width:100%;
-}
-  
-button {
-  cursor: pointer;
-
-  &[diabled], &.disabled {
-    opacity:0.5;
-  }
 }
   
 a {
@@ -73,21 +63,38 @@ a {
 table {
   width:100%;
   border-collapse: collapse;
-}
-  
-th, td {
-  padding: 10px;
-  text-align: left;
-}
-  
-tr {
-  border-bottom: 1px solid $border-color
-}
-  
-tr.nodata td {
-  text-align: center;
-}
 
+  thead, tfoot {
+    tr {
+      background-color: $base-color-dark;
+      color: $white;
+    }
+  }
+
+  tbody {
+    tr:nth-child(even) {
+      background-color: #f5f8ff;
+    }
+
+    tr:hover {
+      background-color: #dee8ff;
+    }
+  }
+
+  tr {
+    border-bottom: 1px solid $border-color;
+  
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+  
+    &.nodata td {
+      text-align: center;
+    }
+  }
+}
+  
 label {
   font-weight: bold;
   margin-bottom: 0.25rem;
@@ -95,7 +102,7 @@ label {
   cursor: pointer;
 }
 
-select,input,textarea, button {
+select, input, textarea, button {
   width:100%;
   height:40px;
   border:1px solid $border-color-dark;
@@ -105,8 +112,18 @@ select,input,textarea, button {
   padding:10px;
 }
 
-select.invalid, input.invalid, textarea.invalid {
+select, input, textarea {
+  &.invalid {
   border:2px solid $border-error-color;
+  }
+}
+
+button {
+  cursor: pointer;
+
+  &[diabled], &.disabled {
+    opacity:0.5;
+  }
 }
 
 textarea {
@@ -119,19 +136,21 @@ input[type="file"] {
   background-color: lightgray;
 }
 
-button[type="reset"],
-input[type="reset"] {
-  background-color: darkgray;
-  color:$white;
+button, input {
+  &[type="reset"] {
+    background-color: darkgray;
+    color:$white;
+  }
 }
 
-select:focus,
-input:not([type="file"]):focus, 
-textarea:focus,
-select:active,
-input:not([type="file"]):active, 
-textarea:active {
-  border:2px solid #72aaff;
+button[type="submit"] {
+  width: 100%;
+}
+
+select, input:not([type="file"]), textarea {
+  &:focus,&:active {
+    border:2px solid #72aaff;
+  }
 }
 
 .container {
@@ -142,36 +161,53 @@ textarea:active {
 }
 
 .btn {
-  padding: 0.5rem;
+  padding:10px;
   border: 1px solid $border-color-dark;
   outline:none;
   background-color: $button-color;
   font-weight: bold;
+
+  &:not(button[type="reset"]):hover {
+    background-color: $button-hover-color;
+  }
+
+  &[type="reset"]:hover {
+    background-color:#9f9f9f;
+  }
 }
 
-.btn:not(button[type="reset"]):hover {
-  background-color: $button-hover-color;
-}
-
-.btn[type="reset"]:hover{
-  background-color:#9f9f9f;
-}
-
-form button[type="submit"].btn {
-  width: 100%;
-}
-
-table thead tr, table tfoot tr {
-  background-color: $base-color-dark;
-  color: $white;
-}
+form {
+  .form-fieldset {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1rem;
+    margin-left: -5px;
+    margin-right: -5px;
   
-table tbody tr:nth-child(even) {
-  background-color: #f5f8ff;
-}
+    .form-field {
+      flex:1;
+      padding:0px 5px;
+      
+      .form-field-label .required {
+        color: $error-color;
+      }
   
-table tbody tr:hover {
-  background-color: #dee8ff;
+      .form-field-error {
+        color: $error-color;
+        margin-top: 5px;
+      }
+    }
+  }
+
+  &#ajf {
+    .form-fieldset:last-of-type {
+      margin-top:3rem;
+    }
+  
+    .form-fieldset img.voices {
+      height: 25px;
+    }
+  }
 }
 
 .float-right {
@@ -186,42 +222,14 @@ table tbody tr:hover {
   margin-top:1rem;
 }
 
-.form-fieldset {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 1rem;
-  margin-left: -5px;
-  margin-right: -5px;
-}
+table.jobs {
+  a.attachment {
+    display:block;
+  }
 
-.form-fieldset .form-field {
-  flex:1;
-  padding:0px 5px;
-}
-
-.form-field .form-field-label .required {
-  color: $error-color;
-}
-
-.form-field .form-field-error {
-  color: $error-color;
-  margin-top: 5px;
-}
-
-#ajf .form-fieldset:last-of-type {
-  margin-top:3rem;
-}
-
-#ajf .form-fieldset img.voices {
-  height: 25px;
-}
-
-table.jobs a.attachment {
-  display:block;
-}
-
-table.jobs tbody tr td:nth-child(1) a.attachment {
-  display:none;
+  tbody tr td:nth-child(1) a.attachment {
+    display:none;
+  }
 }
 
 .page-title {
@@ -263,26 +271,29 @@ table.jobs tbody tr td:nth-child(1) a.attachment {
 }
 
 @media (max-width: 768px){
-    table.jobs tr th:nth-child(3),
-    table.jobs tr td:nth-child(3),
-    table.jobs tr th:nth-child(4),
-    table.jobs tr td:nth-child(4) {
-        display: none;
+    table.jobs {
+      tbody tr td:nth-child(1) a.attachment {
+        display:block;
+      }
+
+      tr {
+        td, th {
+          &:nth-child(3),&:nth-child(4) {
+            display: none;
+          }
+        }
+      }
     }
 
     .form-fieldset {
       flex-direction: column;
+
+      &:not(:first-of-type) .form-field:not(:last-of-type) {
+        margin-bottom: 1rem;
+      }
     }
 
     #ajf .form-fieldset:first-of-type {
       flex-direction: column-reverse;
-    }
-
-    .form-fieldset:not(:first-of-type) .form-field:not(:last-of-type) {
-      margin-bottom: 1rem;
-    }
-
-    table.jobs tbody tr td:nth-child(1) a.attachment {
-      display:block;
     }
 }

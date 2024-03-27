@@ -1,6 +1,9 @@
 html {
   box-sizing: border-box;
   font-size: 14px;
+  background-color: #F5F0F6;
+  padding: 0px;
+  margin: 0px;
 }
 
 *,
@@ -9,26 +12,19 @@ html {
   box-sizing: inherit;
 }
 
-html, body {
-  background-color: #F5F0F6;
-  padding: 0px;
-  margin: 0px;
-}
-
 body {
   display: flex;
   flex-direction: column;
   font-family: sans-serif;
   color: #444444;
   min-height: 100vh;
+  margin: 0px;
 }
-
-main {
+body main {
   flex: 1 1 auto;
 }
-
-header,
-footer {
+body header,
+body footer {
   height: 50px;
   color: #FFFFFF;
   font-size: 1.5rem;
@@ -43,13 +39,6 @@ img {
   max-width: 100%;
 }
 
-button {
-  cursor: pointer;
-}
-button[diabled], button.disabled {
-  opacity: 0.5;
-}
-
 a {
   color: darkgoldenrod;
 }
@@ -58,17 +47,24 @@ table {
   width: 100%;
   border-collapse: collapse;
 }
-
-th, td {
+table thead tr, table tfoot tr {
+  background-color: #2B4162;
+  color: #FFFFFF;
+}
+table tbody tr:nth-child(even) {
+  background-color: #f5f8ff;
+}
+table tbody tr:hover {
+  background-color: #dee8ff;
+}
+table tr {
+  border-bottom: 1px solid #D7B377;
+}
+table tr th, table tr td {
   padding: 10px;
   text-align: left;
 }
-
-tr {
-  border-bottom: 1px solid #D7B377;
-}
-
-tr.nodata td {
+table tr.nodata td {
   text-align: center;
 }
 
@@ -93,6 +89,13 @@ select.invalid, input.invalid, textarea.invalid {
   border: 2px solid firebrick;
 }
 
+button {
+  cursor: pointer;
+}
+button[diabled], button.disabled {
+  opacity: 0.5;
+}
+
 textarea {
   min-height: 150px;
 }
@@ -103,18 +106,16 @@ input[type=file] {
   background-color: lightgray;
 }
 
-button[type=reset],
-input[type=reset] {
+button[type=reset], input[type=reset] {
   background-color: darkgray;
   color: #FFFFFF;
 }
 
-select:focus,
-input:not([type=file]):focus,
-textarea:focus,
-select:active,
-input:not([type=file]):active,
-textarea:active {
+button[type=submit] {
+  width: 100%;
+}
+
+select:focus, select:active, input:not([type=file]):focus, input:not([type=file]):active, textarea:focus, textarea:active {
   border: 2px solid #72aaff;
 }
 
@@ -126,36 +127,42 @@ textarea:active {
 }
 
 .btn {
-  padding: 0.5rem;
+  padding: 10px;
   border: 1px solid #8F754F;
   outline: none;
   background-color: #ff9e2c;
   font-weight: bold;
 }
-
 .btn:not(button[type=reset]):hover {
   background-color: #f88600;
 }
-
 .btn[type=reset]:hover {
   background-color: #9f9f9f;
 }
 
-form button[type=submit].btn {
-  width: 100%;
+form .form-fieldset {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+  margin-left: -5px;
+  margin-right: -5px;
 }
-
-table thead tr, table tfoot tr {
-  background-color: #2B4162;
-  color: #FFFFFF;
+form .form-fieldset .form-field {
+  flex: 1;
+  padding: 0px 5px;
 }
-
-table tbody tr:nth-child(even) {
-  background-color: #f5f8ff;
+form .form-fieldset .form-field .form-field-label .required {
+  color: #d45b00;
 }
-
-table tbody tr:hover {
-  background-color: #dee8ff;
+form .form-fieldset .form-field .form-field-error {
+  color: #d45b00;
+  margin-top: 5px;
+}
+form#ajf .form-fieldset:last-of-type {
+  margin-top: 3rem;
+}
+form#ajf .form-fieldset img.voices {
+  height: 25px;
 }
 
 .float-right {
@@ -170,40 +177,9 @@ table tbody tr:hover {
   margin-top: 1rem;
 }
 
-.form-fieldset {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 1rem;
-  margin-left: -5px;
-  margin-right: -5px;
-}
-
-.form-fieldset .form-field {
-  flex: 1;
-  padding: 0px 5px;
-}
-
-.form-field .form-field-label .required {
-  color: #d45b00;
-}
-
-.form-field .form-field-error {
-  color: #d45b00;
-  margin-top: 5px;
-}
-
-#ajf .form-fieldset:last-of-type {
-  margin-top: 3rem;
-}
-
-#ajf .form-fieldset img.voices {
-  height: 25px;
-}
-
 table.jobs a.attachment {
   display: block;
 }
-
 table.jobs tbody tr td:nth-child(1) a.attachment {
   display: none;
 }
@@ -230,7 +206,6 @@ table.jobs tbody tr td:nth-child(1) a.attachment {
   color: #FFFFFF;
   border: 1px solid #4caf50;
 }
-
 .alert .close {
   float: right;
   font-size: 18px;
@@ -244,22 +219,19 @@ table.jobs tbody tr td:nth-child(1) a.attachment {
 }
 
 @media (max-width: 768px) {
-  table.jobs tr th:nth-child(3),
-  table.jobs tr td:nth-child(3),
-  table.jobs tr th:nth-child(4),
-  table.jobs tr td:nth-child(4) {
+  table.jobs tbody tr td:nth-child(1) a.attachment {
+    display: block;
+  }
+  table.jobs tr td:nth-child(3), table.jobs tr td:nth-child(4), table.jobs tr th:nth-child(3), table.jobs tr th:nth-child(4) {
     display: none;
   }
   .form-fieldset {
     flex-direction: column;
   }
-  #ajf .form-fieldset:first-of-type {
-    flex-direction: column-reverse;
-  }
   .form-fieldset:not(:first-of-type) .form-field:not(:last-of-type) {
     margin-bottom: 1rem;
   }
-  table.jobs tbody tr td:nth-child(1) a.attachment {
-    display: block;
+  #ajf .form-fieldset:first-of-type {
+    flex-direction: column-reverse;
   }
 }/*# sourceMappingURL=style.css.map */
